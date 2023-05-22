@@ -1,0 +1,81 @@
+package mypack;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+
+import java.awt.event.WindowEvent;
+
+public class MouseEvents implements MouseListener{
+
+	Frame f;
+	Label l;
+
+	MouseEvents(){
+		
+		f=new Frame("mouse events");
+		l=new Label("mouse events");
+		
+		
+		
+		
+		f.add(l);
+	
+		
+		f.addMouseListener(this);
+		f.setSize(300,300);
+		f.setVisible(true);
+		f.setLayout(new FlowLayout());
+		
+		f.addWindowListener(new WindowAdapter(){
+		public void windowClosing(WindowEvent e) {
+			f.dispose();
+		}	
+		});
+		
+		
+		
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		MouseEvents obj=new MouseEvents();
+		
+	}
+
+
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l.setText("mouseclicked");
+	}
+
+
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l.setText("mousepressed");
+		
+	}
+
+
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l.setText("mouse released");
+		
+	}
+
+
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l.setText("mouse entered");
+		
+	}
+
+
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l.setText("mouseexited");
+		
+	}
+}

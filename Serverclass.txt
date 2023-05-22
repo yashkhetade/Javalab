@@ -1,0 +1,16 @@
+import java.net.MalformedURLException;
+
+
+import java.rmi.*;
+public class Serverclass {
+public static void main(String[] args) {
+try {
+PalindromeInterface obj=(PalindromeInterface) new PalindromeClass();
+Naming.rebind("rmi://localhost/abc",obj);
+System.out.print("server is ready");
+} catch (Exception e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+}
+}

@@ -1,0 +1,8 @@
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+interface PalindromeInterface extends Remote {
+	
+ public boolean palindrome( String str)throws RemoteException;
+ 
+ 
+}

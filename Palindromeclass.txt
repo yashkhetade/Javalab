@@ -1,0 +1,28 @@
+import java.rmi.RemoteException;
+
+
+import java.rmi.server.UnicastRemoteObject;
+
+public class PalindromeClass extends UnicastRemoteObject implements
+
+
+PalindromeInterface{
+	
+ protected PalindromeClass()throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+ 
+
+public boolean palindrome(String str){
+String revstr=" ";
+for(int i=str.length()-1; i>=0; i--) {
+ revstr+=str.charAt(i);
+}
+if(str.compareTo(revstr)==0)
+ return true;
+else
+ return false;
+}
+
+}

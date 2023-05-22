@@ -1,0 +1,37 @@
+import java.net.MalformedURLException;
+
+
+import java.rmi.*;
+
+
+public class Clientclass {
+	
+	
+public static void main(String arg[]) throws MalformedURLException,
+
+
+RemoteException, NotBoundException {
+	
+	
+PalindromeInterface obj;
+
+
+obj=(PalindromeInterface) Naming.lookup("rmi://localhost/abc");
+
+
+Boolean b=obj.palindrome("level");
+
+
+if(b)
+ {
+System.out.println("Given string is palindrome");
+ }
+else
+{
+System.out.println("not palindrome");
+ }
+
+
+}
+
+}

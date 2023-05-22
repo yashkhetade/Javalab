@@ -1,0 +1,63 @@
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.applet.*;
+
+
+/*
+ * <applet code="KeyEventsDemo.java" width="300" height="300" 
+</applet>
+ * 
+ */
+
+public class KeyEventsDemo extends Applet implements  KeyListener  {
+
+    String str="KeyBoard Events";
+    
+      public void init(){
+        addKeyListener(this);
+    }
+
+     
+
+      public void paint(Graphics g){
+        g.drawString(str,300,300);
+    }
+
+
+
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		 char key=e.getKeyChar();
+		str="keytyped";
+		repaint();
+		str=str+key;
+		
+		
+	}
+
+
+
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		str="keypressed";
+		repaint();
+	}
+
+
+
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		str="key released";
+		repaint();
+	}
+
+
+
+
+	
+
+
+
+}

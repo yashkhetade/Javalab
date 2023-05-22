@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action ="index.jsp" method="get">
+
+<label>Enter The Number : </label>
+<input type="text"  id="numberInt" name="numberInt" />
+
+<button>Submit</button>
+
+
+</form>
+
+
+</body>
+</html>
+
+
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<h1>Welcome to JSP</h1>
+
+<%
+
+String n=request.getParameter("numberInt");
+int no=Integer.parseInt(n);
+out.println("the entered no is"+no);
+out.println();
+out.println("the cube of the number is"+no*no*no);
+
+%>
+
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+//Name -Yash Khetade
+//Roll No-304B023
+//Registration.java code
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/**
+* Servlet implementation class Register
+*/
+@WebServlet("/Register")
+public class Registration extends HttpServlet {
+private static final long serialVersionUID = 1L;
+
+ /**
+ * @see HttpServlet#HttpServlet()
+ */
+ public Registration() {
+ super();
+ // TODO Auto-generated constructor stub
+ }
+/**
+* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+response)
+*/
+protected void doGet(HttpServletRequest request, HttpServletResponse
+response) throws ServletException, IOException {
+// TODO Auto-generated method stub
+response.getWriter().append("Served at:
+").append(request.getContextPath());
+}
+/**
+* @see HttpServlet#doPost(HttpServletRequest request,
+HttpServletResponse response)
+*/
+protected void doPost(HttpServletRequest request, HttpServletResponse
+response) throws ServletException, IOException {
+String uname=request.getParameter("username");
+String password=request.getParameter("password");
+String email=request.getParameter("email");
+String phone=request.getParameter("country");
+UserBean member=new UserBean(uname, password, email, phone);
+RegistrationDao rdao=new RegistrationDao();
+String result=rdao.insert(member);
+response.getWriter().println(result);
+}
+}
+//RegistrationDao.java codeimport java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+public class RegistrationDao {
+private String dburl = "jdbc:mysql://localhost:3306/javadb";
+private String dbuname = "root";
+private String dbpassword = "yash25";
+private String dbdriver = "com.mysql.cj.jdbc.Driver";
+public void loadDriver(String dbDriver)
+{
+try {
+Class.forName(dbDriver);
+} catch (ClassNotFoundException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+}
+public Connection getConnection() {
+Connection con = null;
+try {
+con = DriverManager.getConnection(dburl, dbuname, dbpassword);
+} catch (SQLException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+return con;
+}
+public String insert(UserBean member) {
+loadDriver(dbdriver);
+Connection con = getConnection();
+String sql = "insert into servletdata values(?,?,?,?)";
+String result="Data Entered Successfully";
+try {
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setString(1, member.getUsername());
+ps.setString(2, member.getPassword());
+ps.setString(3, member.getEmail());
+ps.setNString(4, member.getCountry());
+ps.executeUpdate();
+} catch (SQLException e) {
+// TODO Auto-generated catch block
+result="Data Not Entered Successfully";
+e.printStackTrace();
+}
+return result;
+}
+}
+//UserBean.java codepublic class UserBean {
+private String uname, password, email, country;
+public UserBean() {
+super();
+}
+public UserBean(String uname, String password, String email, String
+country) {
+super();
+this.uname = uname;
+this.password = password;
+this.email = email;
+this.country = country;
+}
+public String getUsername() {
+return uname;
+}
+public void setUsername(String uname) {
+this.uname = uname;
+}
+public String getPassword() {
+return password;
+}
+public void setPassword(String password) {
+this.password = password;
+}
+public String getEmail() {
+return email;
+}
+public void setEmail(String email) {
+this.email = email;
+}
+public String getCountry() {
+return country;
+}
+public void setCountry(String country) {
+this.country = country;
+}
+}
+//index.html code-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Register" method="post">
+<h1 >Login</h1>
+<label>username</label>
+<input type ="text" name ="username">
+<br><br>
+<label> password</label>
+<input type ="password" name ="password">
+<br><br>
+<label> mail id</label>
+<input type ="email" name ="email">
+<br><br>
+<label> country</label>
+<input type ="text" name ="country">
+<br><br>
+<input type ="submit" name ="Submit"> <br/>
+</form>
+</body>
+</html>
