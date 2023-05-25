@@ -1,0 +1,164 @@
+UserDao-
+
+import java.sql.*;
+
+
+public class UserDao
+{
+	String url="jdbc:mysql://localhost:3306/yash";
+	
+	String driver="com.mysql.cj.jdbc.Driver";
+	
+	String usr="root";
+	String pass="yash25";
+	
+	String query="insert into data values(?,?,?,?)";
+	
+	String str="error";
+	
+	
+	public String createuser(String str1,String str2,String str3,String str4) {
+		
+		try {
+			Class.forName(driver);
+			Connection conn=DriverManager.getConnection(url,usr,pass);
+			
+			PreparedStatement st=conn.prepareStatement(query);
+			
+			st.setString(1, str1);
+			st.setString(2, str2);
+			st.setString(3, str3);
+			st.setString(4, str4);
+			
+			st.execute();
+			
+			str="data entered succesfully";
+
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return str;
+		
+	}
+
+	
+	
+}
+
+
+Regitster-
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Register
+ */
+@WebServlet("/Register")
+public class Register extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Register() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		doGet(request, response);
+		
+		String username=request.getParameter("username");
+		
+		String password=request.getParameter("password");
+		
+		String email=request.getParameter("email");
+		
+		String country=request.getParameter("country");
+		
+	
+		
+		
+		UserDao ud=new UserDao();
+		
+		String msg=ud.createUser(username,password,email,country);
+		
+		response.getWriter().print(msg);
+		
+		
+		
+		
+		
+		
+	}
+
+}
+
+
+index.html-
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>Registration Page</h1>
+
+<form action="Register" method="post">
+
+<label >Enter Username</label>
+<input type="text" name="username"/>
+
+<br/>
+<br/>
+
+<label >Enter Password</label>
+<input type="password" name="password"/>
+
+<br/>
+<br/>
+
+<label >Enter Email</label>
+<input type="text" name="email"/>
+
+<br/>
+<br/>
+
+<label >Enter Country</label>
+<input type="text" name="country"/>
+
+<br/>
+<br/>
+
+
+
+<input type="Submit" name="Submit"/>
+
+
+</form>
+</body>
+</html>
